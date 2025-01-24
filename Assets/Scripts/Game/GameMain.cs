@@ -48,7 +48,7 @@ namespace Game
                         break;
                     }
 
-                    _radius = _pressedTime * 0.1f + 1;
+                    _radius = _pressedTime * 0.4f + 1;
 
                     for (int i = 0; i < 360; i++)
                     {

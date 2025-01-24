@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jamKit: {fileID: 1042202867}
   _camera: {fileID: 1018750420}
-  _currentSceneName: Game
+  _currentSceneName: Splash
 --- !u!4 &283082029
 Transform:
   m_ObjectHideFlags: 0

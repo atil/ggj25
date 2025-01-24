@@ -15,7 +15,7 @@ MonoBehaviour:
   _discreteTickInteval: 0.2
   _sceneTransitionParams:
     _Color: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
-    _Duration: 2
+    _Duration: 0.2
     _Curve:
       serializedVersion: 2
       m_Curve:

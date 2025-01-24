@@ -23,6 +23,11 @@ namespace Game
 
         public override string Tick()
         {
+            if (Input.anyKeyDown)
+            {
+                return "Game";
+            }
+
             return _playButtonClicked ? "Game" : "End";
         }
     }
