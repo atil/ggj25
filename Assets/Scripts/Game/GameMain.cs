@@ -1,11 +1,8 @@
 ﻿// Juice ideas
 // - SFX: boom, win, rainbow win, breathing
-// - highscore text
 // - balancing
-// - mobile aspect ratio
 // - Build
-// - Itch page / GGJ page
-// - multiplayer version
+// - Itch page description / GGJ submission
 
 using JamKit;
 using TMPro;
