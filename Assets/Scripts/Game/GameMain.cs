@@ -129,17 +129,7 @@ namespace Game
                 case GameState.Lifted:
                     {
                         _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
-                        
-                        // End State Rainbow
-                        for (int i=0; i<= 360; i++) {
-                            int colorSize = 10;
-                            float t = i / 360;
-                            int rawColorIndex = (int)(t * 10);
-                            int colorIndex = Mathf.Clamp(rawColorIndex, 0, colorSize-2);
-                            float t2 = t*colorSize - colorIndex;
-                            Color c = Color.Lerp(_circleColors[colorIndex], _circleColors[colorIndex + 1], t2);
-                            
-                        }
+                        _circleMaterialInstance.SetFloat("_IsRainbow", 1);
                         break;
                     }
                     

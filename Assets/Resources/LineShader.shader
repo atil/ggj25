@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Torreng/LineShader"
 {
     Properties
@@ -34,13 +36,12 @@ Shader "Torreng/LineShader"
             struct appdata
             {
                 float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float3 worldPos : TEXCOORD0;
             };
 
             float _IsRainbow;
@@ -59,7 +60,7 @@ Shader "Torreng/LineShader"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                //o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+				o.worldPos = mul(unity_ObjectToWorld, float4(v.vertex.xyz, 1.0)).xyz;
                 return o;
             }
 
@@ -76,15 +77,29 @@ Shader "Torreng/LineShader"
                 colorArray[8] = _Color9;
                 colorArray[9] = _Color10;
 
-                if (_IsRainbow == 0) {
+                if (_IsRainbow == 0) 
+                {
                     return _Color1;
-                } else {
-                    float a = acos(normalize(i.vertex).x) / pi;
-                    float index = a * 10;
-                    if (index != 0) {
-                        return _Color6;
+                } 
+                else 
+                {
+                    float pi = 3.1415926;
+                    float twoPi = 2 * pi;
+                    float angleRad = acos(normalize(i.worldPos).x);
+                    angleRad += _Time.z;
+
+                    while (angleRad > twoPi) 
+                    {
+                        angleRad -= twoPi;
                     }
-                    return colorArray[index];
+
+                    float indexFloat = (angleRad * 10) / twoPi;
+                    int indexLower = floor(indexFloat) % 10;
+                    int indexUpper = ceil(indexFloat) % 10;
+                    float t = indexFloat - indexLower;
+                    float4 col = lerp(colorArray[indexLower], colorArray[indexUpper], t);
+
+                    return col;
                 }
             }
             ENDCG
