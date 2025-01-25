@@ -1303,7 +1303,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _wobblinessIntensity: 8
   _wobblinessAmount: 2.5
-  _backgroundMinMaxSpeeds: {x: 0.2, y: 10}
+  _backgroundMinMaxSpeeds: {x: 0.2, y: 1.5}
 --- !u!4 &1849588138
 Transform:
   m_ObjectHideFlags: 0
