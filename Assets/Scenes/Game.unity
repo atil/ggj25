@@ -253,7 +253,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0.123
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 79812d91439c01c4b925a67ed017dba6, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -278,8 +278,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1053205020
@@ -966,7 +966,7 @@ MonoBehaviour:
   _timeLimit: 5
   _circleSizeCoeff: 0.4
   _circleGrowSpeed: 1
-  _mainCurve:
+  _colorCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -991,8 +991,33 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _circleColors:
-  - {r: 0.36862746, g: 0.5058824, b: 0.6745098, a: 0}
-  - {r: 0.56078434, g: 0.7372549, b: 0.73333335, a: 0}
+  - {r: 0.36862746, g: 0.5058824, b: 0.6745098, a: 1}
+  - {r: 0.56078434, g: 0.7372549, b: 0.73333335, a: 1}
+  _wobblyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _wobblinessIntensity: 3
 --- !u!4 &1849588138
 Transform:
   m_ObjectHideFlags: 0

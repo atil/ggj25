@@ -20,8 +20,10 @@ namespace Game
         [SerializeField] private float _circleGrowSpeed = 1.0f;
 
         [Header("Juice")]
-        [SerializeField] private AnimationCurve _mainCurve;
+        [SerializeField] private AnimationCurve _colorCurve;
         [SerializeField] private Color[] _circleColors;
+        [SerializeField] private AnimationCurve _wobblyCurve;
+        [SerializeField] private float _wobblinessIntensity = 3;
 
         private Material _circleMaterialInstance;
 
@@ -47,7 +49,7 @@ namespace Game
                 float cos = Mathf.Cos(i * Mathf.Deg2Rad);
                 float sin = Mathf.Sin(i * Mathf.Deg2Rad);
                 Vector3 center = Vector3.zero;
-                _circle.SetPosition(i, center + new Vector3(_radius * cos, _radius * sin, 0));
+                _circle.SetPosition(i, Vector3.zero + new Vector3(_radius * cos, _radius * sin, 0));
             }
         }
 
@@ -67,8 +69,7 @@ namespace Game
                         break;
                     }
 
-                    float t = _mainCurve.Evaluate(_pressedTime / _timeLimit);
-
+                    float t = _colorCurve.Evaluate(_pressedTime / _timeLimit);
                     Color c = Color.Lerp(_circleColors[0], _circleColors[1], t);
                     _circleMaterialInstance.SetColor("_Color1", c);
 
@@ -78,8 +79,8 @@ namespace Game
                     {
                         float cos = Mathf.Cos(i * Mathf.Deg2Rad);
                         float sin = Mathf.Sin(i * Mathf.Deg2Rad);
-                        Vector3 center = Vector3.zero;
-                        _circle.SetPosition(i, center + new Vector3(_radius * cos, _radius * sin, 0));
+                        _circle.SetPosition(i, Vector3.zero + new Vector3(_radius * cos, _radius * sin, 0));
+
                     }
                     break;
                 case GameState.Lifted:
