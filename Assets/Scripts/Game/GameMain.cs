@@ -74,7 +74,6 @@ namespace Game
 
             _backgroundMaterialInstance = _backgroundQuadRenderer.material;
             _backgroundMaterialInstance.SetTexture("_Pattern", _backgroundPatterns.GetRandom());
-            JamKit.FadeInMusic(0.2f);
         }
 
         public override string Tick()
@@ -93,7 +92,7 @@ namespace Game
                             _circle.gameObject.SetActive(false);
                             _gameOverText.gameObject.SetActive(true);
                             _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
-                            JamKit.FadeOutMusic(0.2f);
+                            JamKit.FadeOutMusic(0.0f);
                             break;
                         }
 
@@ -142,6 +141,7 @@ namespace Game
 
             if (Input.anyKeyDown && _gameState == GameState.GameOver)
             {
+                JamKit.FadeInMusic(0.2f);
                 return SameScene;
             }
 
