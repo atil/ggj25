@@ -253,8 +253,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Circle
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6e194e6249d6d4b458c28f90068ae76a, type: 2}
+  m_sharedMaterial: {fileID: -7619581210344289726, guid: 6e194e6249d6d4b458c28f90068ae76a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -457,8 +457,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: <press any key>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6e194e6249d6d4b458c28f90068ae76a, type: 2}
+  m_sharedMaterial: {fileID: -7619581210344289726, guid: 6e194e6249d6d4b458c28f90068ae76a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
