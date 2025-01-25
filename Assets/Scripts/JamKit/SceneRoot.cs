@@ -19,6 +19,8 @@ namespace JamKit
             FadeIn, FadeOut
         }
 
+        public const string SameScene = null;
+
         [SerializeField] private Image _coverImage;
 
         protected JamKit JamKit { get; private set; }

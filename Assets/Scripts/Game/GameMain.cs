@@ -65,7 +65,7 @@ namespace Game
 
             if (Input.anyKeyDown && _gameState == GameState.GameOver)
             {
-                return null;
+                return SameScene;
             }
 
             if (Input.anyKey)
