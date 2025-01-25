@@ -157,8 +157,11 @@ namespace Game
                 if (_gameState == GameState.Pressing)
                 {
                     float score = _timeLimit - _pressedTime;
-                    _scoreText.gameObject.SetActive(true);
-                    _scoreText.text = score.ToString("0.000");
+                    if (_pressedTime / _timeLimit > 0.5f) // cheat prevention
+                    {
+                        _scoreText.gameObject.SetActive(true);
+                        _scoreText.text = score.ToString("0.000");
+                    }
                     _gameState = GameState.Lifted;
                 }
             }
