@@ -17,6 +17,7 @@ namespace Game
         [Header("Scene")]
         [SerializeField] private LineRenderer _circle;
         [SerializeField] private TextMeshProUGUI _scoreText;
+        [SerializeField] private TextMeshProUGUI _gameOverText;
         [SerializeField] private MeshRenderer _backgroundQuadRenderer;
         [SerializeField] private Texture2D[] _backgroundPatterns;
 
@@ -89,6 +90,7 @@ namespace Game
                         {
                             _gameState = GameState.GameOver;
                             _circle.gameObject.SetActive(false);
+                            _gameOverText.gameObject.SetActive(true);
                             _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
                             break;
                         }
