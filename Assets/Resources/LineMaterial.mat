@@ -68,6 +68,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _IsRainbow: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -80,6 +81,15 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 0.36862746, g: 0.5058824, b: 0.6745098, a: 1}
+    - _Color10: {r: 0.7490196, g: 0.38039216, b: 0.41568628, a: 1}
+    - _Color2: {r: 0.36862746, g: 0.5058824, b: 0.6745098, a: 1}
+    - _Color3: {r: 0.5058824, g: 0.6313726, b: 0.75686276, a: 1}
+    - _Color4: {r: 0.53333336, g: 0.7529412, b: 0.8156863, a: 1}
+    - _Color5: {r: 1, g: 1, b: 1, a: 1}
+    - _Color6: {r: 0.7058824, g: 0.5568628, b: 0.6784314, a: 1}
+    - _Color7: {r: 0.6392157, g: 0.74509805, b: 0.54901963, a: 1}
+    - _Color8: {r: 0.92156863, g: 0.79607844, b: 0.54509807, a: 1}
+    - _Color9: {r: 0.8156863, g: 0.5294118, b: 0.4392157, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MyColor: {r: 0.36862746, g: 0.5058824, b: 0.6745098, a: 1}
   m_BuildTextureStacks: []

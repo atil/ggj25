@@ -84,50 +84,65 @@ namespace Game
                 case GameState.Initial:
                     break;
                 case GameState.Pressing:
-                    _pressedTime += Time.deltaTime * _circleGrowSpeed;
+                    {    
+                        _pressedTime += Time.deltaTime * _circleGrowSpeed;
 
-                    if (_pressedTime > _timeLimit)
-                    {
-                        _gameState = GameState.GameOver;
-                        _circle.gameObject.SetActive(false);
-                        _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
-                        break;
+                        if (_pressedTime > _timeLimit)
+                        {
+                            _gameState = GameState.GameOver;
+                            _circle.gameObject.SetActive(false);
+                            _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
+                            break;
+                        }
+
+                        int colorSize = 10;
+                        float t = _colorCurve.Evaluate(_pressedTime / _timeLimit);
+                        int rawColorIndex = (int)(t * colorSize);
+                        int colorIndex = Mathf.Clamp(rawColorIndex, 0, colorSize-2);
+                        float t2 = t*colorSize - colorIndex;
+                        Color c = Color.Lerp(_circleColors[colorIndex], _circleColors[colorIndex + 1], t2);
+                        _circleMaterialInstance.SetColor("_Color1", c);
+                    
+                        _radius = _pressedTime * _circleSizeCoeff + 1;
+
+                        float wobblinessT = _wobblinessCurve.Evaluate(_pressedTime / _timeLimit);
+                        for (int i = 0; i <= 360; i++)
+                        {
+                            float cos = Mathf.Cos(i * Mathf.Deg2Rad);
+                            float sin = Mathf.Sin(i * Mathf.Deg2Rad);
+
+                            float levelTime = Time.time - _levelLoadTime;
+                            float radiusOffset = Mathf.PerlinNoise(cos * _wobblinessIntensity + levelTime, sin * _wobblinessIntensity + levelTime) * _wobblinessAmount * wobblinessT;
+                            float pointRadius = _radius + radiusOffset;
+                            _circle.SetPosition(i, Vector3.zero + new Vector3(pointRadius * cos, pointRadius * sin, 0));
+                        }
+
+                        AnimationCurve widthCurveCopy = _circle.widthCurve;
+                        AdjustWidthCurveWithTime(ref widthCurveCopy, t);
+                        _circle.widthCurve = widthCurveCopy;
+
+                        float backgroundSpeed = Mathf.Lerp(_backgroundMinMaxSpeeds.x, _backgroundMinMaxSpeeds.y, t);
+                        _backgroundMaterialInstance.SetFloat("_SpeedCoeff", backgroundSpeed);
+
                     }
-
-                    int colorSize = 10;
-                    float t = _colorCurve.Evaluate(_pressedTime / _timeLimit);
-                    int rawColorIndex = (int)(t * colorSize);
-                    int colorIndex = Mathf.Clamp(rawColorIndex, 0, colorSize-2);
-                    float t2 = (t*colorSize - colorIndex) / (1);
-                    Color c = Color.Lerp(_circleColors[colorIndex], _circleColors[colorIndex + 1], t2);
-                    _circleMaterialInstance.SetColor("_Color1", c);
-
-                    _radius = _pressedTime * _circleSizeCoeff + 1;
-
-                    float wobblinessT = _wobblinessCurve.Evaluate(_pressedTime / _timeLimit);
-                    for (int i = 0; i <= 360; i++)
-                    {
-                        float cos = Mathf.Cos(i * Mathf.Deg2Rad);
-                        float sin = Mathf.Sin(i * Mathf.Deg2Rad);
-
-                        float levelTime = Time.time - _levelLoadTime;
-                        float radiusOffset = Mathf.PerlinNoise(cos * _wobblinessIntensity + levelTime, sin * _wobblinessIntensity + levelTime) * _wobblinessAmount * wobblinessT;
-                        float pointRadius = _radius + radiusOffset;
-                        _circle.SetPosition(i, Vector3.zero + new Vector3(pointRadius * cos, pointRadius * sin, 0));
-                    }
-
-                    AnimationCurve widthCurveCopy = _circle.widthCurve;
-                    AdjustWidthCurveWithTime(ref widthCurveCopy, t);
-                    _circle.widthCurve = widthCurveCopy;
-
-                    float backgroundSpeed = Mathf.Lerp(_backgroundMinMaxSpeeds.x, _backgroundMinMaxSpeeds.y, t);
-                    _backgroundMaterialInstance.SetFloat("_SpeedCoeff", backgroundSpeed);
-
                     break;
                 case GameState.Lifted:
-                    _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
-
-                    break;
+                    {
+                        _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
+                        
+                        // End State Rainbow
+                        for (int i=0; i<= 360; i++) {
+                            int colorSize = 10;
+                            float t = i / 360;
+                            int rawColorIndex = (int)(t * 10);
+                            int colorIndex = Mathf.Clamp(rawColorIndex, 0, colorSize-2);
+                            float t2 = t*colorSize - colorIndex;
+                            Color c = Color.Lerp(_circleColors[colorIndex], _circleColors[colorIndex + 1], t2);
+                            
+                        }
+                        break;
+                    }
+                    
             }
 
             if (Input.anyKeyDown && _gameState == GameState.GameOver)
