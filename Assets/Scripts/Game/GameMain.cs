@@ -19,6 +19,7 @@ namespace Game
         [Header("Scene")]
         [SerializeField] private LineRenderer _circle;
         [SerializeField] private TextMeshProUGUI _scoreText;
+        [SerializeField] private TextMeshProUGUI _gameOverText;
         [SerializeField] private MeshRenderer _backgroundQuadRenderer;
         [SerializeField] private Texture2D[] _backgroundPatterns;
 
@@ -91,6 +92,7 @@ namespace Game
                         {
                             _gameState = GameState.GameOver;
                             _circle.gameObject.SetActive(false);
+                            _gameOverText.gameObject.SetActive(true);
                             _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
                             break;
                         }
@@ -157,7 +159,7 @@ namespace Game
                 {
                     float score = _timeLimit - _pressedTime;
                     _scoreText.gameObject.SetActive(true);
-                    _scoreText.text = score.ToString("0.000");
+                    _scoreText.text = score.ToString("0.00000");
                     _gameState = GameState.Lifted;
                 }
             }
