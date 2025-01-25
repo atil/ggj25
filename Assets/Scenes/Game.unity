@@ -1220,8 +1220,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: e6d1cf1a533a1df419bb6df17b279d27, type: 3}
   - {fileID: 2800000, guid: 1b5f515ad057bf24eb3da01bd0ed0ce8, type: 3}
   - {fileID: 2800000, guid: 2d410672fa78be0438a879071e195a2c, type: 3}
-  _timeLimit: 5
-  _timeLimitRandomness: 2.5
+  _timeLimit: 2
+  _timeLimitRandomness: 8
   _circleSizeCoeff: 0.4
   _circleGrowSpeed: 1
   _colorCurve:
