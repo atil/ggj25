@@ -1,4 +1,5 @@
 ﻿// Juice ideas
+// - SFX: boom, win, rainbow win, breathing
 // - highscore text
 // - balancing
 // - mobile aspect ratio
