@@ -82,9 +82,15 @@ namespace Game
                         break;
                     }
 
+                    int colorSize = 10;
                     float t = _colorCurve.Evaluate(_pressedTime / _timeLimit);
-                    Color c = Color.Lerp(_circleColors[0], _circleColors[1], t);
+                    int rawColorIndex = (int)(t * colorSize);
+                    int colorIndex = Mathf.Clamp(rawColorIndex, 0, colorSize-2);
+                    float t2 = (t*colorSize - colorIndex) / (1);
+                    Color c = Color.Lerp(_circleColors[colorIndex], _circleColors[colorIndex + 1], t2);
+                    //Debug.Log(t + " " + colorIndex + " " + t2);
                     _circleMaterialInstance.SetColor("_Color1", c);
+                    
 
                     _radius = _pressedTime * _circleSizeCoeff + 1;
 
