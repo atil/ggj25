@@ -1,11 +1,12 @@
 ﻿// Juice ideas
-// - more circle colors
-// - circle being rainbow-ish
-// - circle wobbliness
+// - end state rainbow
+// - end state hareketli
 // - background patterns
 // - SFX
-
-// - carrying run result to endscene
+// - highscore text
+// - balancing
+// - Build
+// - multiplayer version
 
 using JamKit;
 using TMPro;
