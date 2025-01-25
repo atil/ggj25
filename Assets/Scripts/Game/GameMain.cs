@@ -1,7 +1,7 @@
 ﻿// Juice ideas
-// - SFX
 // - highscore text
 // - balancing
+// - mobile aspect ratio
 // - Build
 // - Itch page / GGJ page
 // - multiplayer version
