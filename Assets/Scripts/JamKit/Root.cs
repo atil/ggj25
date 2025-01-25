@@ -28,6 +28,11 @@ namespace JamKit
             string nextSceneName = _currentScene.Tick();
             if (nextSceneName != _currentSceneName)
             {
+                if (nextSceneName == null) // #jamkit TODO: Reloading scenes
+                {
+                    nextSceneName = _currentSceneName;
+                }
+
                 _jamKit.Run(ChangeSceneCoroutine(_currentSceneName, nextSceneName));
             }
         }

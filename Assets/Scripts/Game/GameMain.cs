@@ -65,14 +65,14 @@ namespace Game
 
             if (Input.anyKeyDown && _gameState == GameState.GameOver)
             {
-                return "End";
+                return null;
             }
 
             if (Input.anyKey)
             {
                 if (_gameState == GameState.Lifted)
                 {
-                    return "End";
+                    return null;
                 }
                 else if (_gameState == GameState.Initial)
                 {
