@@ -1,5 +1,10 @@
-﻿// - more circle colors
+﻿// Juice ideas
+// - more circle colors
+// - circle being rainbow-ish
 // - circle wobbliness
+// - background patterns
+// - SFX
+
 // - carrying run result to endscene
 
 using JamKit;
@@ -16,6 +21,7 @@ namespace Game
 
         [Header("Balancing")]
         [SerializeField] private float _timeLimit = 5;
+        [SerializeField] private float _timeLimitRandomness = 0.2f;
         [SerializeField] private float _circleSizeCoeff = 0.4f;
         [SerializeField] private float _circleGrowSpeed = 1.0f;
 
@@ -42,6 +48,7 @@ namespace Game
 
         protected override void InitScene()
         {
+            _timeLimit += Random.Range(0, _timeLimitRandomness);
             _circleMaterialInstance = _circle.materials[0];
 
             for (int i = 0; i <= 360; i++)
