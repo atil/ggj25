@@ -6,6 +6,7 @@
 // - highscore text
 // - balancing
 // - Build
+// - Itch page / GGJ page
 // - multiplayer version
 
 using JamKit;
@@ -19,6 +20,8 @@ namespace Game
         [Header("Scene")]
         [SerializeField] private LineRenderer _circle;
         [SerializeField] private TextMeshProUGUI _scoreText;
+        [SerializeField] private MeshRenderer _backgroundQuadRenderer;
+        [SerializeField] private Texture2D[] _backgroundPatterns;
 
         [Header("Balancing")]
         [SerializeField] private float _timeLimit = 7.5f;
@@ -32,8 +35,10 @@ namespace Game
         [SerializeField] private AnimationCurve _wobblinessCurve;
         [SerializeField] private float _wobblinessIntensity = 8.0f;
         [SerializeField] private float _wobblinessAmount = 2.5f;
+        [SerializeField] private Vector2 _backgroundMinMaxSpeeds;
 
         private Material _circleMaterialInstance;
+        private Material _backgroundMaterialInstance;
 
         private enum GameState
         {
@@ -68,6 +73,9 @@ namespace Game
 
             _circle.widthCurve = curve;
             _levelLoadTime = Time.time;
+
+            _backgroundMaterialInstance = _backgroundQuadRenderer.material;
+            _backgroundMaterialInstance.SetTexture("_Pattern", _backgroundPatterns.GetRandom());
         }
 
         public override string Tick()
@@ -83,6 +91,7 @@ namespace Game
                     {
                         _gameState = GameState.GameOver;
                         _circle.gameObject.SetActive(false);
+                        _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
                         break;
                     }
 
@@ -112,8 +121,12 @@ namespace Game
                     AdjustWidthCurveWithTime(ref widthCurveCopy, t);
                     _circle.widthCurve = widthCurveCopy;
 
+                    float backgroundSpeed = Mathf.Lerp(_backgroundMinMaxSpeeds.x, _backgroundMinMaxSpeeds.y, t);
+                    _backgroundMaterialInstance.SetFloat("_SpeedCoeff", backgroundSpeed);
+
                     break;
                 case GameState.Lifted:
+                    _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
 
                     break;
             }
