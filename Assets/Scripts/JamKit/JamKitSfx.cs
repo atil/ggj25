@@ -78,6 +78,15 @@ namespace JamKit
             {
                 _commonAudioSource.PlayOneShot(clip);
             }
+        
+        }
+
+        public void FadeInMusic(float duration)
+        {
+            Tween(AnimationCurve.Linear(0f, 0f, 1f, 1f),
+                duration,
+                t => { _musicAudioSource.volume = Mathf.Lerp(0, 0.15f, t); },
+                () => { _musicAudioSource.volume = 0.15f; });
         }
 
         public void FadeOutMusic(float duration)
