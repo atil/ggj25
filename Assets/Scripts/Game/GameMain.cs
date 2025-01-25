@@ -20,15 +20,15 @@ namespace Game
         [SerializeField] private TextMeshProUGUI _scoreText;
 
         [Header("Balancing")]
-        [SerializeField] private float _timeLimit = 5;
-        [SerializeField] private float _timeLimitRandomness = 0.2f;
+        [SerializeField] private float _timeLimit = 7.5f;
+        [SerializeField] private float _timeLimitRandomness = 2.5f;
         [SerializeField] private float _circleSizeCoeff = 0.4f;
         [SerializeField] private float _circleGrowSpeed = 1.0f;
 
         [Header("Juice")]
         [SerializeField] private AnimationCurve _colorCurve;
         [SerializeField] private Color[] _circleColors;
-        [SerializeField] private AnimationCurve _wobblyCurve;
+        [SerializeField] private AnimationCurve _wobblinessCurve;
         [SerializeField] private float _wobblinessIntensity = 3;
 
         private Material _circleMaterialInstance;
@@ -51,13 +51,19 @@ namespace Game
             _timeLimit += Random.Range(0, _timeLimitRandomness);
             _circleMaterialInstance = _circle.materials[0];
 
+            AnimationCurve curve = new();
+
             for (int i = 0; i <= 360; i++)
             {
                 float cos = Mathf.Cos(i * Mathf.Deg2Rad);
                 float sin = Mathf.Sin(i * Mathf.Deg2Rad);
                 Vector3 center = Vector3.zero;
                 _circle.SetPosition(i, Vector3.zero + new Vector3(_radius * cos, _radius * sin, 0));
+
+                curve.AddKey(i / 360.0f, 1.0f);
             }
+
+            _circle.widthCurve = curve;
         }
 
         public override string Tick()
@@ -89,6 +95,11 @@ namespace Game
                         _circle.SetPosition(i, Vector3.zero + new Vector3(_radius * cos, _radius * sin, 0));
 
                     }
+
+                    AnimationCurve widthCurveCopy = _circle.widthCurve;
+                    DoStuffWithAnimationCurve(ref widthCurveCopy, t);
+                    _circle.widthCurve = widthCurveCopy;
+
                     break;
                 case GameState.Lifted:
 
@@ -119,12 +130,21 @@ namespace Game
                     _scoreText.gameObject.SetActive(true);
                     _scoreText.text = score.ToString("0.000");
                     _gameState = GameState.Lifted;
-                    Debug.Log($"Score: {score}");
                 }
             }
 
             return "Game";
         }
 
+        private void DoStuffWithAnimationCurve(ref AnimationCurve curve, float timeNormalized)
+        {
+            Keyframe[] keys = curve.keys;
+            for (int i = 0; i <= 360; i++)
+            {
+                float t = i / 360.0f;
+                keys[i].value = 1.0f - (timeNormalized * 0.9f);
+            }
+            curve.keys = keys;
+        }
     }
 }
