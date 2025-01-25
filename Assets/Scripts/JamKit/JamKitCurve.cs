@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace JamKit
 {
+    // @jamkit TODO get rid of the Curves asset
     public partial class JamKit
     {
         public Coroutine TweenCoroutine(AnimationCurve curve, float duration, Action<float> perTickAction)

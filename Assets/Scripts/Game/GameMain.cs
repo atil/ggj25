@@ -1,6 +1,5 @@
-﻿// - fix gap
-// - progression graph
-// - change line colors
+﻿// - more circle colors
+// - circle wobbliness
 // - carrying run result to endscene
 
 using JamKit;
@@ -17,6 +16,14 @@ namespace Game
 
         [Header("Balancing")]
         [SerializeField] private float _timeLimit = 5;
+        [SerializeField] private float _circleSizeCoeff = 0.4f;
+        [SerializeField] private float _circleGrowSpeed = 1.0f;
+
+        [Header("Juice")]
+        [SerializeField] private AnimationCurve _mainCurve;
+        [SerializeField] private Color[] _circleColors;
+
+        private Material _circleMaterialInstance;
 
         private enum GameState
         {
@@ -33,6 +40,8 @@ namespace Game
 
         protected override void InitScene()
         {
+            _circleMaterialInstance = _circle.materials[0];
+
             for (int i = 0; i <= 360; i++)
             {
                 float cos = Mathf.Cos(i * Mathf.Deg2Rad);
@@ -49,7 +58,7 @@ namespace Game
                 case GameState.Initial:
                     break;
                 case GameState.Pressing:
-                    _pressedTime += Time.deltaTime * 1f;
+                    _pressedTime += Time.deltaTime * _circleGrowSpeed;
 
                     if (_pressedTime > _timeLimit)
                     {
@@ -58,7 +67,12 @@ namespace Game
                         break;
                     }
 
-                    _radius = _pressedTime * 0.4f + 1;
+                    float t = _mainCurve.Evaluate(_pressedTime / _timeLimit);
+
+                    Color c = Color.Lerp(_circleColors[0], _circleColors[1], t);
+                    _circleMaterialInstance.SetColor("_Color1", c);
+
+                    _radius = _pressedTime * _circleSizeCoeff + 1;
 
                     for (int i = 0; i <= 360; i++)
                     {
