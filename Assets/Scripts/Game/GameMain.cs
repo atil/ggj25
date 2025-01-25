@@ -1,7 +1,6 @@
 ﻿// Juice ideas
 // - end state rainbow
 // - end state hareketli
-// - background patterns
 // - SFX
 // - highscore text
 // - balancing
