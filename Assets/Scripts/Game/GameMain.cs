@@ -162,7 +162,7 @@ namespace Game
                     if (_pressedTime / _timeLimit > 0.5f) // cheat prevention
                     {
                         _scoreText.gameObject.SetActive(true);
-                        _scoreText.text = score.ToString("0.000");
+                        _scoreText.text = score.ToString("0.0000");
                     }
                     _gameState = GameState.Lifted;
                 }
