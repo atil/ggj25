@@ -1,11 +1,21 @@
-﻿using JamKit;
+﻿// - fix gap
+// - progression graph
+// - change line colors
+// - carrying run result to endscene
+
+using JamKit;
+using TMPro;
 using UnityEngine;
 
 namespace Game
 {
     public class GameMain : SceneRoot
     {
+        [Header("Scene")]
         [SerializeField] private LineRenderer _circle;
+        [SerializeField] private TextMeshProUGUI _scoreText;
+
+        [Header("Balancing")]
         [SerializeField] private float _timeLimit = 5;
 
         private enum GameState
@@ -23,7 +33,7 @@ namespace Game
 
         protected override void InitScene()
         {
-            for (int i = 0; i < 360; i++)
+            for (int i = 0; i <= 360; i++)
             {
                 float cos = Mathf.Cos(i * Mathf.Deg2Rad);
                 float sin = Mathf.Sin(i * Mathf.Deg2Rad);
@@ -50,7 +60,7 @@ namespace Game
 
                     _radius = _pressedTime * 0.4f + 1;
 
-                    for (int i = 0; i < 360; i++)
+                    for (int i = 0; i <= 360; i++)
                     {
                         float cos = Mathf.Cos(i * Mathf.Deg2Rad);
                         float sin = Mathf.Sin(i * Mathf.Deg2Rad);
@@ -84,6 +94,8 @@ namespace Game
                 if (_gameState == GameState.Pressing)
                 {
                     float score = _timeLimit - _pressedTime;
+                    _scoreText.gameObject.SetActive(true);
+                    _scoreText.text = score.ToString("0.000");
                     _gameState = GameState.Lifted;
                     Debug.Log($"Score: {score}");
                 }

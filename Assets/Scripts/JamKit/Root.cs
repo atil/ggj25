@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 namespace JamKit
 {
+    // @jamkit TODO having to go to root each time sucks. also prototyping UI in game scene isn't fun
+    // @jamkit TODO better solution for reloading scenes. "null" should mean "continue". also get rid of initial condition
     public class Root : MonoBehaviour
     {
         [SerializeField] private JamKit _jamKit;
@@ -28,7 +30,7 @@ namespace JamKit
             string nextSceneName = _currentScene.Tick();
             if (nextSceneName != _currentSceneName)
             {
-                if (nextSceneName == SceneRoot.SameScene) // @jamkit TODO better solution for this?
+                if (nextSceneName == SceneRoot.SameScene) 
                 {
                     nextSceneName = _currentSceneName;
                 }
