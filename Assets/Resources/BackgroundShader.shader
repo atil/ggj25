@@ -54,7 +54,7 @@ Shader "Torreng/Background"
             fixed4 frag (v2f i) : SV_Target
             {
                 float2 time = float2(-_Time.x, _Time.x) * _SpeedCoeff;
-                fixed4 patternColor = tex2D(_Pattern, i.uv * 8 + time);
+                fixed4 patternColor = tex2D(_Pattern, i.uv * 4 + time);
                 float isColor1 = step(0.5, patternColor.a);
                 return lerp(_Color1, _Color2, isColor1);
             }
