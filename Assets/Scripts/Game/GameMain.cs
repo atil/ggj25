@@ -1,6 +1,4 @@
 ﻿// Juice ideas
-// - end state rainbow
-// - end state hareketli
 // - SFX
 // - highscore text
 // - balancing
@@ -131,7 +129,10 @@ namespace Game
                 case GameState.Lifted:
                     {
                         _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
-                        _circleMaterialInstance.SetFloat("_IsRainbow", 1);
+                        if (_timeLimit - _pressedTime < 0.01f)
+                        {
+                            _circleMaterialInstance.SetFloat("_IsRainbow", 1);
+                        }
                         break;
                     }
                     
