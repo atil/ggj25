@@ -29,7 +29,8 @@ namespace Game
         [SerializeField] private AnimationCurve _colorCurve;
         [SerializeField] private Color[] _circleColors;
         [SerializeField] private AnimationCurve _wobblinessCurve;
-        [SerializeField] private float _wobblinessIntensity = 3;
+        [SerializeField] private float _wobblinessIntensity = 8.0f;
+        [SerializeField] private float _wobblinessAmount = 2.5f;
 
         private Material _circleMaterialInstance;
 
@@ -90,27 +91,20 @@ namespace Game
                     int colorIndex = Mathf.Clamp(rawColorIndex, 0, colorSize-2);
                     float t2 = (t*colorSize - colorIndex) / (1);
                     Color c = Color.Lerp(_circleColors[colorIndex], _circleColors[colorIndex + 1], t2);
-                    //Debug.Log(t + " " + colorIndex + " " + t2);
                     _circleMaterialInstance.SetColor("_Color1", c);
-                    
 
                     _radius = _pressedTime * _circleSizeCoeff + 1;
 
+                    float wobblinessT = _wobblinessCurve.Evaluate(_pressedTime / _timeLimit);
                     for (int i = 0; i <= 360; i++)
                     {
                         float cos = Mathf.Cos(i * Mathf.Deg2Rad);
                         float sin = Mathf.Sin(i * Mathf.Deg2Rad);
 
-                        // https://stackoverflow.com/a/60772438
-                        static float OneDimensionNoise(float deg) => Mathf.Sin(2 * deg * Mathf.Deg2Rad) + Mathf.Sin(Mathf.PI * deg * Mathf.Deg2Rad);
-                        float normalizedAngle = (i / 360.0f);
-                        if (normalizedAngle == 1.0f) normalizedAngle = 0;
-
                         float levelTime = Time.time - _levelLoadTime;
-                        float radiusOffset = Mathf.PerlinNoise(cos * 8.0f + levelTime, sin * 8.0f + levelTime) * 2.5f * t;
+                        float radiusOffset = Mathf.PerlinNoise(cos * _wobblinessIntensity + levelTime, sin * _wobblinessIntensity + levelTime) * _wobblinessAmount * wobblinessT;
                         float pointRadius = _radius + radiusOffset;
                         _circle.SetPosition(i, Vector3.zero + new Vector3(pointRadius * cos, pointRadius * sin, 0));
-
                     }
 
                     AnimationCurve widthCurveCopy = _circle.widthCurve;

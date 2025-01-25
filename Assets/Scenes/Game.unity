@@ -1000,30 +1000,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _colorSelectCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   _circleColors:
   - {r: 0.36862746, g: 0.5058824, b: 0.6745098, a: 1}
   - {r: 0.5058824, g: 0.6313726, b: 0.75686276, a: 1}
@@ -1037,11 +1013,39 @@ MonoBehaviour:
   - {r: 0.7490196, g: 0.38039216, b: 0.41568628, a: 1}
   _wobblinessCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.9382507
+      value: 0.25311947
+      inSlope: 0.9500037
+      outSlope: 1.6815126
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.059154127
+      outWeight: 0.75991935
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _wobblinessIntensity: 3
+  _wobblinessIntensity: 8
+  _wobblinessAmount: 2.5
 --- !u!4 &1849588138
 Transform:
   m_ObjectHideFlags: 0
