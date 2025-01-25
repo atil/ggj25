@@ -43,6 +43,7 @@ namespace Game
 
         private float _radius = 1;
         private float _pressedTime = 0;
+        private float _levelLoadTime = 0;
 
         private GameState _gameState = GameState.Initial;
 
@@ -64,6 +65,7 @@ namespace Game
             }
 
             _circle.widthCurve = curve;
+            _levelLoadTime = Time.time;
         }
 
         public override string Tick()
@@ -92,12 +94,21 @@ namespace Game
                     {
                         float cos = Mathf.Cos(i * Mathf.Deg2Rad);
                         float sin = Mathf.Sin(i * Mathf.Deg2Rad);
-                        _circle.SetPosition(i, Vector3.zero + new Vector3(_radius * cos, _radius * sin, 0));
+
+                        // https://stackoverflow.com/a/60772438
+                        static float OneDimensionNoise(float deg) => Mathf.Sin(2 * deg * Mathf.Deg2Rad) + Mathf.Sin(Mathf.PI * deg * Mathf.Deg2Rad);
+                        float normalizedAngle = (i / 360.0f);
+                        if (normalizedAngle == 1.0f) normalizedAngle = 0;
+
+                        float levelTime = Time.time - _levelLoadTime;
+                        float radiusOffset = Mathf.PerlinNoise(cos * 8.0f + levelTime, sin * 8.0f + levelTime) * 2.5f * t;
+                        float pointRadius = _radius + radiusOffset;
+                        _circle.SetPosition(i, Vector3.zero + new Vector3(pointRadius * cos, pointRadius * sin, 0));
 
                     }
 
                     AnimationCurve widthCurveCopy = _circle.widthCurve;
-                    DoStuffWithAnimationCurve(ref widthCurveCopy, t);
+                    AdjustWidthCurveWithTime(ref widthCurveCopy, t);
                     _circle.widthCurve = widthCurveCopy;
 
                     break;
@@ -136,7 +147,7 @@ namespace Game
             return "Game";
         }
 
-        private void DoStuffWithAnimationCurve(ref AnimationCurve curve, float timeNormalized)
+        private void AdjustWidthCurveWithTime(ref AnimationCurve curve, float timeNormalized)
         {
             Keyframe[] keys = curve.keys;
             for (int i = 0; i <= 360; i++)

@@ -963,7 +963,7 @@ MonoBehaviour:
   _coverImage: {fileID: 538998849}
   _circle: {fileID: 1648754998}
   _scoreText: {fileID: 1053205019}
-  _timeLimit: 7.5
+  _timeLimit: 5
   _timeLimitRandomness: 2.5
   _circleSizeCoeff: 0.4
   _circleGrowSpeed: 1
