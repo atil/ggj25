@@ -1,6 +1,4 @@
-﻿// Juice ideas
-// - SFX: boom, win, rainbow win, breathing
-// - balancing
+﻿// - bug
 // - Build
 // - Itch page description / GGJ submission
 
@@ -81,7 +79,7 @@ namespace Game
                 case GameState.Initial:
                     break;
                 case GameState.Pressing:
-                    {    
+                    {
                         _pressedTime += Time.deltaTime * _circleGrowSpeed;
 
                         if (_pressedTime > _timeLimit)
@@ -91,17 +89,18 @@ namespace Game
                             _gameOverText.gameObject.SetActive(true);
                             _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
                             JamKit.FadeOutMusic(0.0f);
+                            JamKit.PlayRandom("Pop");
                             break;
                         }
 
                         int colorSize = 10;
                         float t = _colorCurve.Evaluate(_pressedTime / _timeLimit);
                         int rawColorIndex = (int)(t * colorSize);
-                        int colorIndex = Mathf.Clamp(rawColorIndex, 0, colorSize-2);
-                        float t2 = t*colorSize - colorIndex;
+                        int colorIndex = Mathf.Clamp(rawColorIndex, 0, colorSize - 2);
+                        float t2 = t * colorSize - colorIndex;
                         Color c = Color.Lerp(_circleColors[colorIndex], _circleColors[colorIndex + 1], t2);
                         _circleMaterialInstance.SetColor("_Color1", c);
-                    
+
                         _radius = _pressedTime * _circleSizeCoeff + 1;
 
                         float wobblinessT = _wobblinessCurve.Evaluate(_pressedTime / _timeLimit);
@@ -126,15 +125,8 @@ namespace Game
                     }
                     break;
                 case GameState.Lifted:
-                    {
-                        _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
-                        if (_timeLimit - _pressedTime < 0.01f)
-                        {
-                            _circleMaterialInstance.SetFloat("_IsRainbow", 1);
-                        }
-                        break;
-                    }
-                    
+                    break;
+
             }
 
             if (Input.anyKeyDown && _gameState == GameState.GameOver)
@@ -158,12 +150,34 @@ namespace Game
             {
                 if (_gameState == GameState.Pressing)
                 {
+                    _backgroundMaterialInstance.SetFloat("_SpeedCoeff", _backgroundMinMaxSpeeds.x);
+
+                    bool tooEarly = _pressedTime / _timeLimit < 0.5f;
                     float score = _timeLimit - _pressedTime;
-                    if (_pressedTime / _timeLimit > 0.5f) // cheat prevention
+                    bool isRainbow = score < 0.01f;
+                    if (isRainbow)
+                    {
+                        JamKit.PlaySfx("WinRainbow");
+                        _circleMaterialInstance.SetFloat("_IsRainbow", 1);
+                    }
+                    else
+                    {
+                        if (tooEarly)
+                        {
+                            JamKit.PlaySfx("TooEarly");
+                        }
+                        else
+                        {
+                            JamKit.PlaySfx(score < 0.1f ? "Win_2" : "Win_1");
+                        }
+                    }
+
+                    if (!tooEarly)
                     {
                         _scoreText.gameObject.SetActive(true);
                         _scoreText.text = score.ToString("0.0000");
                     }
+
                     _gameState = GameState.Lifted;
                 }
             }

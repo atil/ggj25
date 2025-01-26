@@ -306,6 +306,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3350211567806347560, guid: 409f529f683b5054789039b119c187f4, type: 3}
+      propertyPath: m_Volume
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 3350211567806347561, guid: 409f529f683b5054789039b119c187f4, type: 3}
       propertyPath: m_Name
       value: JamKit
@@ -314,6 +318,10 @@ PrefabInstance:
       propertyPath: _leaderboardEnv
       value: 
       objectReference: {fileID: 4900000, guid: 0bd3d3371ff94aa4d9451dc2752e1544, type: 3}
+    - target: {fileID: 3350211567806347563, guid: 409f529f683b5054789039b119c187f4, type: 3}
+      propertyPath: m_Volume
+      value: 0.15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

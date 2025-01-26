@@ -14,3 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clips:
   - {fileID: 8300000, guid: 9a14d8bdd96334eb49e5d1bf9b8cecd5, type: 3}
+  - {fileID: 8300000, guid: e7ad9dfb840673042a8fd63895122f9c, type: 3}
+  - {fileID: 8300000, guid: ef03fd654f3b9fd4e86ce17aa60f8ac1, type: 3}
+  - {fileID: 8300000, guid: df6ac7bd8183ef143aa1daa053005311, type: 3}
+  - {fileID: 8300000, guid: 3137fe50341b1f5469b11667d2529edf, type: 3}
+  - {fileID: 8300000, guid: 3b347ab774973c948b8f8bfa6703485f, type: 3}
+  - {fileID: 8300000, guid: abbf15b82f539cc4782b28bcff8ac215, type: 3}
+  - {fileID: 8300000, guid: d640e5c34691c2b468f2b51ee9a3d5d5, type: 3}
+  - {fileID: 8300000, guid: 9cb592413f7bfc848b576161360a1bee, type: 3}
