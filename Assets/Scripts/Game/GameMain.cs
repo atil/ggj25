@@ -175,7 +175,17 @@ namespace Game
                     if (!tooEarly)
                     {
                         _scoreText.gameObject.SetActive(true);
-                        _scoreText.text = score.ToString("0.0000");
+                        string formatString = score < 0.01f ? "0.000000" : "0.00";
+                        string scoreString = score.ToString(formatString);
+                        for (int i = scoreString.Length - 1; i >= 0; i--) // delete trailing zeros
+                        {
+                            if (scoreString[i] == '0')
+                            {
+                                scoreString = scoreString.Remove(i, 1);
+                            }
+                            else break;
+                        }
+                        _scoreText.text = scoreString;
                     }
 
                     _gameState = GameState.Lifted;
